@@ -11,7 +11,7 @@ BluskyのJavaクライアントです。依存はGsonのみの最低限にして
 セッションを生成
 ```java
 String identifier = "アカウント（yamanee.bsky.social みたいなやつ）";
-String password ="アプリパスワード";
+String password ="アプリパスワード（Webクライアントの「設定画面->高度な設定」から生成できるやつ）";
 Session session = Hekiraku.createSession(identifier, password);
 ```
 
@@ -60,3 +60,18 @@ session.delete();
 
 そのほかもいくつかできることはあるので、（いい加減な）テストコードとか見てみてください。
 
+## テストとか
+
+ポストとか無駄にしちゃうのでスキップ推奨。
+JARの生成はこんなかんじで。
+
+```cmd
+mvn install -DskipTests=true
+```
+
+テストを動かしたい場合には、/src/test/resources/bluesky.properties を生成して、以下みたいな記述をしてください。
+
+```properties
+identifier=アカウント（yamanee.bsky.social みたいなやつ。@はなし）
+password=アプリパスワード（Webクライアントの「設定画面->高度な設定」から生成できるやつ）
+```
