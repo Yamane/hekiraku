@@ -1,0 +1,6 @@
+/.project
+/.settings
+/.classpath
+src/test/resources/bluesky.properties
+src/main/resources/bluesky.properties
+/target
