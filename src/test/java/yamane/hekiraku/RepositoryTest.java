@@ -16,7 +16,7 @@ public class RepositoryTest extends AbstractTest {
     System.out.println(session.repo().describeRepo().jsonString());
   }
 
-  //@Test
+  @Test
   public void uploadBlobTest1() throws Exception {
     BlobLink blob1 = session.repo().uploadBlob(new File("01.jpg"));
     BlobLink blob2 = session.repo().uploadBlob(new File("02.jpg"));
@@ -28,7 +28,7 @@ public class RepositoryTest extends AbstractTest {
     session.post(record);
   }
   
-  //@Test
+  @Test
   public void uploadBlobTest2() throws Exception {
     BlobLink blob = session.repo().uploadBlob(new File("02.jpg"));
     EmbedExternal external = new EmbedExternal();

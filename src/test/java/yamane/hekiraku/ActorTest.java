@@ -37,13 +37,13 @@ public class ActorTest  extends AbstractTest {
     suggestions.forEach(a -> System.out.println(a.getDisplayName() + " @" + a.getHandle()));
   }
   
-  //@Test
+  @Test
   public void testSearchActors() throws Exception {
     List<Actor> suggestions = session.actor().searchActors("コッペ", 3, 3);
     suggestions.forEach(a -> System.out.println(a.jsonString()));
   }
   
-  //@Test
+  @Test
   public void testSearchActorsTypeahead() throws Exception {
     List<Actor> suggestions = session.actor().searchActorsTypeahead("coppe", 3);
     suggestions.forEach(a -> System.out.println(a.jsonString()));

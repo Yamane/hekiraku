@@ -1,5 +1,7 @@
 package yamane.hekiraku;
 
+import org.junit.jupiter.api.Test;
+
 import yamane.hekiraku.model.Identifer;
 import yamane.hekiraku.model.PageableList;
 import yamane.hekiraku.model.PostFeed;
@@ -11,13 +13,13 @@ import yamane.hekiraku.model.record.PostRecord;
 
 public class RepositoryPostTest extends AbstractTest {
   
-  //@Test
+  @Test
   public void postTest() throws Exception {
     Identifer id = session.post(new PostRecord("はろーあおいそら！！"));
     session.reply("きょうはくもりぞら・・・", id);
   }
   
-  //@Test
+  @Test
   public void retchTextTest1() throws Exception {
     PostRecord record = new PostRecord(
         """
@@ -27,7 +29,7 @@ public class RepositoryPostTest extends AbstractTest {
     session.post(record);
   }
   
-  //@Test
+  @Test
   public void retchTextTest2() throws Exception {
     PostRecord record = new PostRecord(
         """
@@ -37,7 +39,7 @@ public class RepositoryPostTest extends AbstractTest {
     session.post(record);
   }
   
-  //@Test
+  @Test
   public void retchTextTest3() throws Exception {
     PostRecord record = new PostRecord(
         """
@@ -47,14 +49,14 @@ public class RepositoryPostTest extends AbstractTest {
     session.post(record);
   }
   
-  //@Test
+  @Test
   public void embedTest1() throws Exception {
     PostRecord record = new PostRecord("外部参照テスト");
     record.setEmbed(new EmbedRecord(getFirstPost()));
     session.post(record);
   }
   
-  //@Test
+  @Test
   public void embedTest2() throws Exception {
     EmbedExternal embed = new EmbedExternal();
     embed.setTitle("Get Started | Bluesky");
@@ -65,19 +67,19 @@ public class RepositoryPostTest extends AbstractTest {
     session.post(record);
   }
   
-  //@Test
+  @Test
   public void getPostTest() throws Exception {
     Identifer id = session.getPost("https://bsky.app/profile/koyanee.bsky.social/post/3kqyxh7gt6a2t");
     System.out.println(id.jsonString());
   }
   
-  //@Test
+  @Test
   public void getPostsTest() throws Exception {
     PageableList<IdentiferRecord<PostRecord>> list = session.getPosts(10, null);
     list.forEach(r -> System.out.println(r.jsonString()));
   }
   
-  //@Test
+  @Test
   public void deleteTest() throws Exception {
     Identifer id = session.post(new PostRecord("すぐ消す！！"));
     session.deletePost(id.getUri());
