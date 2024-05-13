@@ -10,6 +10,7 @@ import static yamane.hekiraku.util.HttpSupport.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,6 +26,7 @@ public class Hekiraku {
   static {
     bundle = ResourceBundle.getBundle("hekiraku");
     df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+    df.setTimeZone(TimeZone.getTimeZone("UTC"));
     logger = Logger.getLogger(Hekiraku.class.getSimpleName());
     LogFormatter.addRoot();
   }
