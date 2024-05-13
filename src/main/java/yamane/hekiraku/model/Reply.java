@@ -24,6 +24,11 @@ public class Reply implements Serializable {
         setRoot(post.getRecord().getReply().getRoot());
       }
     }
+    if(id instanceof Notification noti) {
+      if(noti.getRecord().getReply() != null) {
+        setRoot(noti.getRecord().getReply().getRoot());
+      }
+    }
   }
   
   public Reply(JsonObject json) throws BskyException {
