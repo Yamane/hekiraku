@@ -12,8 +12,6 @@ import java.util.List;
 
 import com.google.gson.JsonObject;
 
-import yamane.hekiraku.BskyException;
-
 public class RepositoryInfo implements Serializable {
 
   private String handle;
@@ -22,7 +20,7 @@ public class RepositoryInfo implements Serializable {
   private List<String> collections;
   private Boolean handleIsCorrect;
   
-  public RepositoryInfo(JsonObject json) throws BskyException {
+  public RepositoryInfo(JsonObject json) {
     this.handle = getStr(json.get("handle"));
     this.did = getStr(json.get("did"));
     this.didDoc = new DidDoc(json.getAsJsonObject("didDoc"));

@@ -11,8 +11,6 @@ import java.io.Serializable;
 
 import com.google.gson.JsonObject;
 
-import yamane.hekiraku.BskyException;
-
 public class PostFeed implements Serializable {
 
   private PostView post;
@@ -20,7 +18,7 @@ public class PostFeed implements Serializable {
   private Reason reason;
   private String feedContext;
   
-  public PostFeed(JsonObject json) throws BskyException {
+  public PostFeed(JsonObject json) {
     this.post = new PostView(json.getAsJsonObject("post"));
     if(json.get("reply") != null) {
       this.reply = new Reply(json.getAsJsonObject("reply"));
@@ -61,7 +59,7 @@ public class PostFeed implements Serializable {
       return "app.bsky.feed.defs#reasonRepost";
     }
     
-    public Reason(JsonObject json) throws BskyException {
+    public Reason(JsonObject json) {
       this.by = new Actor(json.getAsJsonObject("by"));
       this.indexedAt = getStr(json.get("indexedAt"));
     }

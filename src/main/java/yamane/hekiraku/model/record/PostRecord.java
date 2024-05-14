@@ -14,7 +14,6 @@ import java.util.List;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializer;
 
-import yamane.hekiraku.BskyException;
 import yamane.hekiraku.model.Reply;
 import yamane.hekiraku.model.embed.AbstractEmbed;
 import yamane.hekiraku.model.ritchtext.Facet;
@@ -50,7 +49,7 @@ public class PostRecord extends AbstractRecord {
     this.langs = Arrays.asList(get("langs").split(","));
   }
   
-  public PostRecord(JsonObject json) throws BskyException {
+  public PostRecord(JsonObject json) {
     super(json);
     this.ritchText = new RitchText(json);
     if(json.get("embed") != null) {

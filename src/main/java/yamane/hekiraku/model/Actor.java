@@ -12,7 +12,6 @@ import java.util.List;
 
 import com.google.gson.JsonObject;
 
-import yamane.hekiraku.BskyException;
 import yamane.hekiraku.model.LabeledElement.Label;
 
 public class Actor implements Serializable {
@@ -31,7 +30,7 @@ public class Actor implements Serializable {
   private Viewer viewer;
   private List<Label> labels;
   
-  public Actor(JsonObject json) throws BskyException {
+  public Actor(JsonObject json) {
     this.did = getStr(json.get("did"));
     this.handle = getStr(json.get("handle"));
     this.displayName = getStr(json.get("displayName"));

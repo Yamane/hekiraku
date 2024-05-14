@@ -12,8 +12,6 @@ import java.util.List;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
-import yamane.hekiraku.BskyException;
-
 public class DidDoc implements Serializable {
 
   @SerializedName("@context")
@@ -23,7 +21,7 @@ public class DidDoc implements Serializable {
   private List<VerificationMethod> verificationMethod;
   private List<Service> service;
   
-  public DidDoc(JsonObject json) throws BskyException {
+  public DidDoc(JsonObject json) {
     this.context = getList(json.getAsJsonArray("@context"));
     this.id = getStr(json.get("id"));
     this.alsoKnownAs = getList(json.getAsJsonArray("alsoKnownAs"));

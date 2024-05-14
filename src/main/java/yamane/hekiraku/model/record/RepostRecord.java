@@ -7,7 +7,6 @@ package yamane.hekiraku.model.record;
 
 import com.google.gson.JsonObject;
 
-import yamane.hekiraku.BskyException;
 import yamane.hekiraku.model.Identifer;
 
 public class RepostRecord extends AbstractRecord {
@@ -23,7 +22,7 @@ public class RepostRecord extends AbstractRecord {
     this.subject = id;
   }
   
-  public RepostRecord(JsonObject json) throws BskyException {
+  public RepostRecord(JsonObject json) {
     super(json);
     this.subject = new Identifer(json.getAsJsonObject("subject"));
   }

@@ -7,7 +7,6 @@ package yamane.hekiraku.model.embed;
 
 import com.google.gson.JsonObject;
 
-import yamane.hekiraku.BskyException;
 import yamane.hekiraku.model.Identifer;
 
 public class EmbedRecordView extends AbstractEmbed {
@@ -19,7 +18,7 @@ public class EmbedRecordView extends AbstractEmbed {
     return "app.bsky.embed.record#view";
   }
   
-  public EmbedRecordView(JsonObject json) throws BskyException {
+  public EmbedRecordView(JsonObject json) {
     super();
     if(json.get("record") != null) {
       this.record = new IdentiferEmbedRecordView(json.getAsJsonObject("record"));

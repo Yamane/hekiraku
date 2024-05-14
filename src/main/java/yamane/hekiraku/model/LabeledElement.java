@@ -6,14 +6,12 @@ import java.util.List;
 
 import com.google.gson.JsonObject;
 
-import yamane.hekiraku.BskyException;
-
 public class LabeledElement extends Identifer {
 
   private Viewer viewer;
   private List<Label> labels;
   
-  public LabeledElement(JsonObject json) throws BskyException {
+  public LabeledElement(JsonObject json) {
     super(json);
     this.viewer = json.get("viewer") != null ? new Viewer(json.getAsJsonObject("viewer")) : null;
     this.labels = getList(json.getAsJsonArray("labels"), Label.class);

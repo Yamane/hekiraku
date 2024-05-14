@@ -12,7 +12,6 @@ import java.util.List;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
-import yamane.hekiraku.BskyException;
 import yamane.hekiraku.model.Actor;
 import yamane.hekiraku.model.Identifer;
 import yamane.hekiraku.model.LabeledElement.Label;
@@ -31,7 +30,7 @@ public class IdentiferEmbedRecordView extends Identifer {
   private String indexedAt;
 
   
-  public IdentiferEmbedRecordView(JsonObject json) throws BskyException {
+  public IdentiferEmbedRecordView(JsonObject json) {
     super(json);
     this.type = "app.bsky.embed.record#viewRecord";
     this.author = new Actor(json.getAsJsonObject("author"));

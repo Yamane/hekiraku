@@ -11,7 +11,6 @@ import java.util.List;
 
 import com.google.gson.JsonObject;
 
-import yamane.hekiraku.BskyException;
 import yamane.hekiraku.util.RitchTextSupport;
 import yamane.hekiraku.util.RitchTextSupport.FacetList;
 
@@ -29,13 +28,13 @@ public class RitchText implements Serializable {
     this.facets = facets;
   }
   
-  public RitchText(String prefixName, JsonObject json) throws BskyException {
+  public RitchText(String prefixName, JsonObject json) {
     super();
     this.text = getStr(json.get(prefixName));
     this.facets = getList(json.getAsJsonArray(prefixName + "Facets"), Facet.class);
   }
   
-  public RitchText(JsonObject json) throws BskyException {
+  public RitchText(JsonObject json) {
     super();
     this.text = getStr(json.get("text"));
     this.facets = getList(json.getAsJsonArray("facets"), Facet.class);

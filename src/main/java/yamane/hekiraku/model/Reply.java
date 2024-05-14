@@ -9,8 +9,6 @@ import java.io.Serializable;
 
 import com.google.gson.JsonObject;
 
-import yamane.hekiraku.BskyException;
-
 public class Reply implements Serializable {
 
   private Identifer root;
@@ -31,7 +29,7 @@ public class Reply implements Serializable {
     }
   }
   
-  public Reply(JsonObject json) throws BskyException {
+  public Reply(JsonObject json) {
     this.root = new PostView(json.getAsJsonObject("root"));
     this.parent = new PostView(json.getAsJsonObject("parent"));
   }

@@ -15,8 +15,6 @@ import java.util.Map;
 
 import com.google.gson.JsonObject;
 
-import yamane.hekiraku.BskyException;
-
 public class EmbedImagesView extends AbstractEmbed {
 
   private List<Image> images;
@@ -31,7 +29,7 @@ public class EmbedImagesView extends AbstractEmbed {
     this.images = new ArrayList<Image>();
   }
   
-  public EmbedImagesView(JsonObject json) throws BskyException {
+  public EmbedImagesView(JsonObject json) {
     super();
     if(json.get("images") != null) {
       this.images = getList(json.getAsJsonArray("images"), Image.class);

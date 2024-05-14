@@ -12,7 +12,6 @@ import java.util.List;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializer;
 
-import yamane.hekiraku.BskyException;
 import yamane.hekiraku.model.ritchtext.Facet;
 import yamane.hekiraku.model.ritchtext.RitchText;
 
@@ -41,7 +40,7 @@ public class UserList extends LabeledElement {
   private String avatar;
   private String indexedAt;
 
-  public UserList(JsonObject json) throws BskyException {
+  public UserList(JsonObject json) {
     super(json);
     this.name = getStr(json.get("name"));
     this.creator = new Actor(json.getAsJsonObject("creator"));

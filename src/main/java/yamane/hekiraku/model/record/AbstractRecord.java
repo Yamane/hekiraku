@@ -9,7 +9,6 @@ import static yamane.hekiraku.util.GsonSupport.*;
 
 import com.google.gson.JsonObject;
 
-import yamane.hekiraku.BskyException;
 import yamane.hekiraku.model.TypedElement;
 
 public abstract class AbstractRecord extends TypedElement {
@@ -25,7 +24,7 @@ public abstract class AbstractRecord extends TypedElement {
     this.createdAt = getStr(json.get("createdAt"));
   }
   
-  public static AbstractRecord create(JsonObject json) throws BskyException {
+  public static AbstractRecord create(JsonObject json) {
     String type = getStr(json.get("$type"));
     if(type.equals("app.bsky.feed.post")) {
       return new PostRecord(json);

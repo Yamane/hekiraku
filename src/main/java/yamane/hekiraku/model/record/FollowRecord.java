@@ -9,8 +9,6 @@ import static yamane.hekiraku.util.GsonSupport.*;
 
 import com.google.gson.JsonObject;
 
-import yamane.hekiraku.BskyException;
-
 public class FollowRecord extends AbstractRecord {
 
   private String subject;
@@ -24,7 +22,7 @@ public class FollowRecord extends AbstractRecord {
     this.subject = did;
   }
   
-  public FollowRecord(JsonObject json) throws BskyException {
+  public FollowRecord(JsonObject json) {
     super(json);
     this.subject = getStr(json.get("subject"));
   }

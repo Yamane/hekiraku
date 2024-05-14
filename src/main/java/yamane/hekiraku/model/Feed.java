@@ -9,7 +9,6 @@ import static yamane.hekiraku.util.GsonSupport.*;
 
 import com.google.gson.JsonObject;
 
-import yamane.hekiraku.BskyException;
 import yamane.hekiraku.model.ritchtext.Facet;
 import yamane.hekiraku.util.RitchTextSupport.FacetList;
 
@@ -25,7 +24,7 @@ public class Feed extends LabeledElement {
   private Boolean acceptsInteractions;
   private String indexedAt;
 
-  public Feed(JsonObject json) throws BskyException {
+  public Feed(JsonObject json) {
     super(json);
     this.did = getStr(json.get("did"));
     this.creator = new Actor(json.getAsJsonObject("creator"));

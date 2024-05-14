@@ -9,7 +9,6 @@ import static yamane.hekiraku.util.GsonSupport.*;
 
 import com.google.gson.JsonObject;
 
-import yamane.hekiraku.BskyException;
 import yamane.hekiraku.model.TypedElement;
 
 public abstract class AbstractEmbed extends TypedElement {
@@ -18,7 +17,7 @@ public abstract class AbstractEmbed extends TypedElement {
     super();
   }
   
-  public static AbstractEmbed create(JsonObject json) throws BskyException {
+  public static AbstractEmbed create(JsonObject json) {
     String type = getStr(json.get("$type"));
     if(type.equals("app.bsky.embed.external")) {
       return new EmbedExternal(json);

@@ -10,7 +10,6 @@ import static yamane.hekiraku.util.GsonSupport.*;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
-import yamane.hekiraku.BskyException;
 import yamane.hekiraku.model.embed.AbstractEmbed;
 import yamane.hekiraku.model.record.PostRecord;
 
@@ -27,7 +26,7 @@ public class PostView extends LabeledElement {
   private Integer likeCount;
   private String indexedAt;
   
-  public PostView(JsonObject json) throws BskyException {
+  public PostView(JsonObject json) {
     super(json);
     this.type = getStr(json.get("$type"));
     if(json.get("author") != null) {

@@ -9,7 +9,6 @@ import static yamane.hekiraku.util.GsonSupport.*;
 
 import com.google.gson.JsonObject;
 
-import yamane.hekiraku.BskyException;
 import yamane.hekiraku.model.record.PostRecord;
 
 public class Notification extends Identifer {
@@ -21,7 +20,7 @@ public class Notification extends Identifer {
   private Boolean read;
   private String indexedAt;
   
-  public Notification(JsonObject json) throws BskyException {
+  public Notification(JsonObject json) {
     super(json);
     this.author = new Actor(json.getAsJsonObject("author"));
     this.reason = getStr(json.get("reason"));
