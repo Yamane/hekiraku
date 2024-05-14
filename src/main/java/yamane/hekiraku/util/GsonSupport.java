@@ -24,8 +24,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.stream.JsonWriter;
 
-import yamane.hekiraku.BskyException;
+import yamane.hekiraku.BskyRuntimeException;
 import yamane.hekiraku.Hekiraku;
+import yamane.hekiraku.Session;
 import yamane.hekiraku.model.PageableList;
 import yamane.hekiraku.model.UserList;
 import yamane.hekiraku.model.record.PostRecord;
@@ -37,6 +38,7 @@ public class GsonSupport {
 
   static {
     GsonBuilder builder = new GsonBuilder();
+    builder.registerTypeAdapter(Session.class, Session.SERIALIZER);
     builder.registerTypeAdapter(PostRecord.class, PostRecord.SERIALIZER);
     builder.registerTypeAdapter(UserList.class, UserList.SERIALIZER);
     if(Hekiraku.isDebug()) {
@@ -75,7 +77,7 @@ public class GsonSupport {
     return gson.toJson(obj);
   }
   
-  public static <E> PageableList<E> toPageableList(String str, String listKey, Class<E> clazz) throws BskyException {
+  public static <E> PageableList<E> toPageableList(String str, String listKey, Class<E> clazz) {
     JsonObject json = toJson(str);
     PageableList<E> result = getList(json.getAsJsonArray(listKey), clazz);
     result.setCursor(getStr(json.get("cursor")));
@@ -92,6 +94,10 @@ public class GsonSupport {
   
   public static Integer getInt(JsonElement element) {
     return element != null ? element.getAsInt() : null;
+  }
+  
+  public static Long getLong(JsonElement element) {
+    return element != null ? element.getAsLong() : null;
   }
   
   public static Boolean getBoolean(JsonElement element) {
@@ -118,7 +124,7 @@ public class GsonSupport {
     return val != null ? new JsonPrimitive(val) : JsonNull.INSTANCE;
   }
   
-  public static <E> PageableList<E> getList(JsonArray array, Class<E> clazz) throws BskyException {
+  public static <E> PageableList<E> getList(JsonArray array, Class<E> clazz) throws BskyRuntimeException {
     PageableList<E> list = new PageableList<>();
     if(array != null) {
       for (JsonElement e : array) {
@@ -128,15 +134,15 @@ public class GsonSupport {
     return list;
   }
   
-  public static <E> E newInstance(JsonObject json, Class<E> clazz) throws BskyException {
+  public static <E> E newInstance(JsonObject json, Class<E> clazz) throws BskyRuntimeException {
     try {
       return clazz.getDeclaredConstructor(JsonObject.class).newInstance(json);
     } catch (IllegalAccessException e) {
-      throw new BskyException(GsonSupport.class.getSimpleName() + ".newInstance("+ clazz.getSimpleName() + ")", e);
+      throw new BskyRuntimeException(GsonSupport.class.getSimpleName() + ".newInstance("+ clazz.getSimpleName() + ")", e);
     } catch (InstantiationException | NoSuchMethodException | IllegalArgumentException e) {
-      throw new BskyException(GsonSupport.class.getSimpleName() + ".newInstance("+ clazz.getSimpleName() + ")", e);
+      throw new BskyRuntimeException(GsonSupport.class.getSimpleName() + ".newInstance("+ clazz.getSimpleName() + ")", e);
     } catch (InvocationTargetException e) {
-      throw new BskyException(GsonSupport.class.getSimpleName() + ".newInstance("+ clazz.getSimpleName() + ")", e);
+      throw new BskyRuntimeException(GsonSupport.class.getSimpleName() + ".newInstance("+ clazz.getSimpleName() + ")", e);
     }
   }
 }
