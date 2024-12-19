@@ -1,77 +1,76 @@
-# Hekiraku（碧落）
+# Hekiraku (碧落)
 
-BluskyのJavaクライアントです。依存はGsonのみの最低限にしてみました。とりあえず17以上。コードてきには11でも動きそうなんですが。  
-もとはTwitterで運用していたBOTをBluskyでも動作できるようにしようとして構築したものなので、現状ではすべてのAPIを実装できているわけではありません。  
-でも、ポストする、リプライする、通知を取得するなどのBOTを運用するための最低限の機能は実装できたので、とりあえず公開してみたという状態です。  
-テストもとりあえずAPIからのエラーは出ない程度のいい加減具合。  
-だれかあとはたのむ。
+This is a Java client for Bluesky. I tried to keep the dependencies to a minimum, with only Gson required. It works with Java 17 and above, although the code might run on Java 11 as well.
 
-## つかいかた
+Originally, this was built to make a Twitter bot work on Bluesky, so not all APIs are implemented at the moment. However, the basic functionalities needed to run a bot, such as posting, replying, and fetching notifications, have been implemented. That's why I decided to release it in its current state.
 
-セッションを生成
-```java
-String identifier = "アカウント（yamanee.bsky.social みたいなやつ）";
-String password ="アプリパスワード（Webクライアントの「設定画面->高度な設定」から生成できるやつ）";
+The testing is also minimal, just enough to avoid API errors. I'm hoping someone else can take it from here.
+
+## How to Use
+
+Generate a session:
+```
+String identifier = "account (like yamanee.bsky.social)";
+String password = "app password (can be generated from 'Settings -> Advanced' in the web client)";
 Session session = Hekiraku.createSession(identifier, password);
 ```
 
-ポストしてみる
-```java
-session.post(new PostRecord("はろーあおいそら！！"));
+Try posting:
+```
+session.post(new PostRecord("Hello, bluesky!!"));
 ```
 
-リプライとかする
-```java
-Identifer id = session.post(new PostRecord("はろーあおいそら！！"));
-session.reply("きょうはくもりぞら・・・", id);
+Reply to a post:
+```
+Identifer id = session.post(new PostRecord("Hello, bluesky!!"));
+session.reply("It's cloudy today...", id);
 ```
 
-「いいね」とかする
-```java
-Identifer id = session.post(new PostRecord("はろーあおいそら！！"));
+Like a post:
+```
+Identifer id = session.post(new PostRecord("Hello, bluesky!!"));
 session.like(id);
 ```
 
-画像とか添付してポストしてみる
-```java
+Post with an attached image:
+```
 EmbedImages embed = new EmbedImages();
 BlobLink blob = session.repo().uploadBlob(new File("01.jpg"));
-embed.addImage(blob, "画像");
-PostRecord record = new PostRecord("画像テスト");
+embed.addImage(blob, "Image");
+PostRecord record = new PostRecord("Image test");
 record.setEmbed(embed);
 session.post(record);
 ```
 
-通知を取得してみる
-```java
+Fetch notifications:
+```
 PageableList<Notification> notifications = session.notification().list(10, null);
 notifications.forEach(n -> System.out.println(n.jsonString()));
 ```
 
-通知を全部既読にしてみる
-```java
+Mark all notifications as read:
+```
 session.notification().updateSeen(new Date());
 ```
 
-セッションを破棄してみる
-```java
+Delete a session:
+```
 session.delete();
 ```
 
-そのほかもいくつかできることはあるので、（いい加減な）テストコードとか見てみてください。
+There are a few other things you can do, so please check the (minimal) test code.
 
-## テストとか
+## Testing
 
-ポストとか無駄にしちゃうのでスキップ推奨。
-JARの生成はこんなかんじで。
+Skipping tests is recommended to avoid unnecessary posts. To generate the JAR file:
 
-```cmd
+```
 mvn install -DskipTests=true
 ```
 
-テストを動かしたい場合には、/src/test/resources/bluesky.properties を生成して、以下みたいな記述をしてください。
+If you want to run the tests, create a /src/test/resources/bluesky.properties file with the following content:
 
-```properties
-identifier=アカウント（yamanee.bsky.social みたいなやつ。@はなし）
-password=アプリパスワード（Webクライアントの「設定画面->高度な設定」から生成できるやつ）
+```
+identifier=account (like yamanee.bsky.social, without @)
+password=app password (can be generated from 'Settings -> Advanced' in the web client)
 ```
